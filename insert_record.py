@@ -6,10 +6,13 @@ db_path = "db/main.db"
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 
-if not(os.path.exists(db_path)):
-    cursor.execute("create table todo(title, detail);")
+# cursor.execute("create table todo(id integer, title text, detail text);")
 
-cursor.execute("insert into todo values (?,?)", ("散歩", "ジャパンに買い物に行く"))
+cursor.execute("insert into todo values (?,?,?)", (5, "散歩", "ジャパンに買い物に行く"))
+
+conn.commit()
 
 cursor.execute("select * from todo")
 print(cursor.fetchall())
+
+conn.close()
